@@ -26,6 +26,9 @@ xorg-x11-fonts-Type1
 yum-utils
 @networkmanager-submodules
 @xfce-desktop
+ristretto
+pragha
+atril
 gnome-keyring-pam
 wget
 --exclude==autofs
