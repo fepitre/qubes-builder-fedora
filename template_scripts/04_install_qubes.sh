@@ -24,9 +24,9 @@ fi
 
 echo "--> Installing RPMs..."
 if [ "x$TEMPLATE_FLAVOR" != "x" ]; then
-	installPackages packages_qubes_${TEMPLATE_FLAVOR}.list || RETCODE=1
+    installPackages packages_qubes_${TEMPLATE_FLAVOR}.list || RETCODE=1
 else
-	installPackages packages_qubes.list || RETCODE=1
+    installPackages packages_qubes.list || RETCODE=1
 fi
 
 
