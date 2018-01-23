@@ -61,7 +61,7 @@ endif
 		-r $(FEDORA_PLUGIN_DIR)mock.cfg \
 		--resultdir=$(CHROOT_DIR)/$(DIST_SRC)/$(OUTPUT_DIR) \
 		$(RPM_BUILD_DEFINES) \
-		--buildsrpm --spec $(PACKAGE) --sources $(CHROOT_DIR)$(DIST_SRC)
+		--buildsrpm --spec $(PACKAGE) --sources $(CHROOT_DIR)$(DIST_SRC) --no-clean --no-clean-after
 ifdef INCREMENT_DEVEL_VERSIONS
 	mkdir -p $(ORIG_SRC)/$(OUTPUT_DIR)
 	echo $(devel_ver) > $(devel_ver_path)
@@ -69,7 +69,7 @@ endif
 	cd $(CHROOT_DIR)$(DIST_SRC); sudo $(MOCK_ENV) $(MOCK) \
 		--resultdir=$(CHROOT_DIR)/$(DIST_SRC)/$(OUTPUT_DIR) \
 		-r $(FEDORA_PLUGIN_DIR)/mock.cfg \
-		$(MOCK_EXTRA_OPTS) --no-cleanup-after \
+		$(MOCK_EXTRA_OPTS) --no-clean --no-cleanup-after \
 		$(RPM_BUILD_DEFINES) --rebuild $(srcrpm)
 
 dist-copy-out: pkg_list_path = $(ORIG_SRC)/$(OUTPUT_DIR)/$(notdir $(PACKAGE)).list
