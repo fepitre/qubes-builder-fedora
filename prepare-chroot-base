@@ -95,11 +95,11 @@ if ! [ -f "${INSTALLDIR}/tmp/.prepared_base" ]; then
             exit 1
         }
         result_status="${result##*:}"
-        echo "${result_status}" | grep -q 'PGP' && {
+        echo "${result_status}" | grep -i -q 'NOT OK' && {
             echo "Filename: ${file} contains an invalid PGP signature. Exiting!"
             exit 1
         }
-        echo "${result_status}" | grep -q 'pgp' || {
+        echo "${result_status}" | grep -i -q 'SIGNATURES' || {
             echo "Filename: ${file} is not signed.  Exiting!"
             exit 1
         }
