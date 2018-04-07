@@ -18,7 +18,6 @@ else
 	YUM_BUILDDEP := yum-builddep
 endif
 
-
 ### Targets required by Makefile.generic to build packages
 dist-prepare-chroot: $(CHROOT_DIR)/home/user/.prepared_base
 	@if [ ! -r $(CHROOT_DIR)/proc/cpuinfo ]; then\
@@ -30,7 +29,7 @@ dist-prepare-chroot: $(CHROOT_DIR)/home/user/.prepared_base
 	fi
 	@sudo cp $(FEDORA_PLUGIN_DIR)yum.conf $(CHROOT_DIR)/etc/yum.conf
 
-$(CHROOT_DIR)/home/user/.prepared_base: $(FEDORA_PLUGIN_DIR)/prepare-chroot-builder $(FEDORA_PLUGIN_DIR)/build-pkgs-base.list
+$(CHROOT_DIR)/home/user/.prepared_base: $(FEDORA_PLUGIN_DIR)/prepare-chroot-builder $(FEDORA_PLUGIN_DIR)/$(BUILD_PKG_LIST)
 	@echo "-> Preparing $(DIST) build environment"
 	@sudo -E $(FEDORA_PLUGIN_DIR)/prepare-chroot-builder $(CHROOT_DIR) $(DIST) || exit 1
 	@touch $(CHROOT_DIR)/home/user/.prepared_base
