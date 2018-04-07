@@ -14,12 +14,13 @@ DIR=$1
 DIST=$2
 CHROOT_CACHE_FILE=
 
-if [ "${DIST#fc}" -ge 22 ]; then
+if { grep -q fc <<< "$DIST"; }; then
     YUM=dnf
     DIST_NAME="fedora"
     DIST_VER="${DIST#fc}"
 fi
-if [ "${DIST#centos}" -ge 7 ]; then
+
+if { grep -q centos <<< "$DIST"; }; then
     YUM=yum
     DIST_NAME="centos"
     DIST_VER="${DIST#centos}"

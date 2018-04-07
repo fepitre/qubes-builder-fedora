@@ -10,10 +10,12 @@ ifdef REPO_PROXY
     YUM_OPTS += --setopt=proxy=$(REPO_PROXY)
 endif
 
-ifeq ($(shell expr $(subst fc,,$(DIST)) \>= 22),1)
+ifneq (,$(findstring fc,$(DIST)))
 	YUM := dnf
 	YUM_BUILDDEP := dnf builddep --allowerasing --best
-else
+endif
+
+ifneq (,$(findstring centos,$(DIST)))
 	YUM := yum
 	YUM_BUILDDEP := yum-builddep
 endif
