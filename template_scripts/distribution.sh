@@ -10,31 +10,31 @@ if [ -n "${REPO_PROXY}" ]; then
     YUM_OPTS="$YUM_OPTS --setopt=proxy=${REPO_PROXY}"
 fi
 
-if [ -n "${FEDORA_MIRROR}" ]; then
-    YUM_OPTS="$YUM_OPTS --setopt=fedora.baseurl=${FEDORA_MIRROR%/}/releases/${DIST/fc/}/Everything/x86_64/os/"
-    YUM_OPTS="$YUM_OPTS --setopt=updates.baseurl=${FEDORA_MIRROR%/}/updates/${DIST/fc/}/x86_64/"
-fi
-
-if [ -n "${CENTOS_MIRROR}" ]; then
-    YUM_OPTS="$YUM_OPTS --setopt=base.baseurl=${CENTOS_MIRROR%/}/${DIST/centos/}/os/x86_64"
-    YUM_OPTS="$YUM_OPTS --setopt=updates.baseurl=${CENTOS_MIRROR%/}/${DIST/centos/}/updates/x86_64"
-    YUM_OPTS="$YUM_OPTS --setopt=extras.baseurl=${CENTOS_MIRROR%/}/${DIST/centos/}/extras/x86_64"
-fi
-
-if [ -n "${EPEL_MIRROR}" ]; then
-    YUM_OPTS="$YUM_OPTS --setopt=epel.baseurl=${EPEL_MIRROR%/}/${DIST/centos/}/x86_64"
-fi
-
-if { grep -q fc <<< "$DIST"; }; then
+if grep -q fc <<< "$DIST"; then
     YUM=dnf
     DIST_NAME="fedora"
     DIST_VER="${DIST#fc}"
+    
+    if [ -n "${FEDORA_MIRROR}" ]; then
+    YUM_OPTS="$YUM_OPTS --setopt=fedora.baseurl=${FEDORA_MIRROR%/}/releases/${DIST/fc/}/Everything/x86_64/os/"
+    YUM_OPTS="$YUM_OPTS --setopt=updates.baseurl=${FEDORA_MIRROR%/}/updates/${DIST/fc/}/x86_64/"
+    fi
 fi
 
-if { grep -q centos <<< "$DIST"; }; then
+if grep -q centos <<< "$DIST"; then
     YUM=yum
     DIST_NAME="centos"
     DIST_VER="${DIST#centos}"
+    
+    if [ -n "${CENTOS_MIRROR}" ]; then
+    YUM_OPTS="$YUM_OPTS --setopt=base.baseurl=${CENTOS_MIRROR%/}/${DIST/centos/}/os/x86_64"
+    YUM_OPTS="$YUM_OPTS --setopt=updates.baseurl=${CENTOS_MIRROR%/}/${DIST/centos/}/updates/x86_64"
+    YUM_OPTS="$YUM_OPTS --setopt=extras.baseurl=${CENTOS_MIRROR%/}/${DIST/centos/}/extras/x86_64"
+    fi
+
+    if [ -n "${EPEL_MIRROR}" ]; then
+        YUM_OPTS="$YUM_OPTS --setopt=epel.baseurl=${EPEL_MIRROR%/}/${DIST/centos/}/x86_64"
+    fi
 fi
 
 # ==============================================================================
