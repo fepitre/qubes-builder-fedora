@@ -54,7 +54,7 @@ endif
 		-v -r $(RPM_PLUGIN_DIR)/$(MOCK_CFG) \
 		--resultdir=$(CHROOT_DIR)/$(DIST_SRC)/$(OUTPUT_DIR) \
 		$(RPM_BUILD_DEFINES) \
-		--buildsrpm --spec $(PACKAGE) --sources $(CHROOT_DIR)$(DIST_SRC)
+		--buildsrpm --spec $(PACKAGE) --sources $(CHROOT_DIR)$(DIST_SRC)/$(shell dirname $(PACKAGE))
 ifdef INCREMENT_DEVEL_VERSIONS
 	mkdir -p $(ORIG_SRC)/$(OUTPUT_DIR)
 	echo $(devel_ver) > $(devel_ver_path)
