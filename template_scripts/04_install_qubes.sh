@@ -44,7 +44,7 @@ chroot_cmd sh -c 'rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-qubes-*'
 if [ "$DISTRIBUTION" == "fedora" ]; then
     if [ "$TEMPLATE_FLAVOR" != "minimal" ]; then
         echo "--> Installing 3rd party apps"
-        $SCRIPTSDIR/add_3rd_party_software.sh || RETCODE=1
+        #~ $SCRIPTSDIR/add_3rd_party_software.sh || RETCODE=1
     fi
 fi
 
