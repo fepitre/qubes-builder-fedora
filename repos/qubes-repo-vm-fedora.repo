@@ -30,7 +30,7 @@ cost=740
 [qubes-builder-vm-r%QUBESVER%-unstable]
 name = Qubes OS Repository for VM (unstable)
 baseurl = http://yum.qubes-os.org/r%QUBESVER%/unstable/vm/fc$releasever
-gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-qubes-%QUBESVER%-unstable
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-qubes-%QUBESVER%-primary
 metadata_expire = 6h
 gpgcheck = 1
 enabled=0

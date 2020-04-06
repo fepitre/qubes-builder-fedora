@@ -139,6 +139,13 @@ if [ -n "$USE_QUBES_REPO_VERSION" ]; then
             chroot "$DIR" yum-config-manager --enable 'qubes-builder-*-current-testing'
         fi
     fi
+    if [ "0$USE_QUBES_REPO_UNSTABLE" -gt 0 ]; then
+        if [ "$YUM" = "dnf" ]; then
+            chroot "$DIR" dnf config-manager --set-enabled 'qubes-builder-*-unstable'
+        else
+            chroot "$DIR" yum-config-manager --enable 'qubes-builder-*-unstable'
+        fi
+    fi
 fi
 
 if ! [ -r "$DIR/proc/cpuinfo" ]; then
